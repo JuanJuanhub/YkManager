@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.issCollege.dao.TestresultDAO">
+  <resultMap id="BaseResultMap" type="com.issCollege.po.Testresult">
+    <id column="testResult_id" jdbcType="BIGINT" property="testresultId" />
+    <result column="sampleTest_id" jdbcType="BIGINT" property="sampletestId" />
+    <result column="item_name" jdbcType="BIGINT" property="itemName" />
+    <result column="element_result" jdbcType="REAL" property="elementResult" />
+    <result column="temperature" jdbcType="REAL" property="temperature" />
+    <result column="humidity" jdbcType="REAL" property="humidity" />
+    <result column="instrument_Model" jdbcType="VARCHAR" property="instrumentModel" />
+    <result column="instrument_Num" jdbcType="VARCHAR" property="instrumentNum" />
+    <result column="actual_Error" jdbcType="REAL" property="actualError" />
+    <result column="allowable_Error" jdbcType="REAL" property="allowableError" />
+    <result column="item_units" jdbcType="VARCHAR" property="itemUnits" />
+    <result column="test_Count" jdbcType="SMALLINT" property="testCount" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    testResult_id, sampleTest_id, item_name, element_result, temperature, humidity, instrument_Model, 
+    instrument_Num, actual_Error, allowable_Error, item_units, test_Count
+  </sql>
+  <select id="selectByExample" parameterType="com.issCollege.po.TestresultExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from testresult
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from testresult
+    where testResult_id = #{testresultId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from testresult
+    where testResult_id = #{testresultId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.issCollege.po.TestresultExample">
+    delete from testresult
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.issCollege.po.Testresult">
+    insert into testresult (testResult_id, sampleTest_id, item_name, 
+      element_result, temperature, humidity, 
+      instrument_Model, instrument_Num, actual_Error, 
+      allowable_Error, item_units, test_Count
+      )
+    values (#{testresultId,jdbcType=BIGINT}, #{sampletestId,jdbcType=BIGINT}, #{itemName,jdbcType=BIGINT}, 
+      #{elementResult,jdbcType=REAL}, #{temperature,jdbcType=REAL}, #{humidity,jdbcType=REAL}, 
+      #{instrumentModel,jdbcType=VARCHAR}, #{instrumentNum,jdbcType=VARCHAR}, #{actualError,jdbcType=REAL}, 
+      #{allowableError,jdbcType=REAL}, #{itemUnits,jdbcType=VARCHAR}, #{testCount,jdbcType=SMALLINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.issCollege.po.Testresult">
+    insert into testresult
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="testresultId != null">
+        testResult_id,
+      </if>
+      <if test="sampletestId != null">
+        sampleTest_id,
+      </if>
+      <if test="itemName != null">
+        item_name,
+      </if>
+      <if test="elementResult != null">
+        element_result,
+      </if>
+      <if test="temperature != null">
+        temperature,
+      </if>
+      <if test="humidity != null">
+        humidity,
+      </if>
+      <if test="instrumentModel != null">
+        instrument_Model,
+      </if>
+      <if test="instrumentNum != null">
+        instrument_Num,
+      </if>
+      <if test="actualError != null">
+        actual_Error,
+      </if>
+      <if test="allowableError != null">
+        allowable_Error,
+      </if>
+      <if test="itemUnits != null">
+        item_units,
+      </if>
+      <if test="testCount != null">
+        test_Count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="testresultId != null">
+        #{testresultId,jdbcType=BIGINT},
+      </if>
+      <if test="sampletestId != null">
+        #{sampletestId,jdbcType=BIGINT},
+      </if>
+      <if test="itemName != null">
+        #{itemName,jdbcType=BIGINT},
+      </if>
+      <if test="elementResult != null">
+        #{elementResult,jdbcType=REAL},
+      </if>
+      <if test="temperature != null">
+        #{temperature,jdbcType=REAL},
+      </if>
+      <if test="humidity != null">
+        #{humidity,jdbcType=REAL},
+      </if>
+      <if test="instrumentModel != null">
+        #{instrumentModel,jdbcType=VARCHAR},
+      </if>
+      <if test="instrumentNum != null">
+        #{instrumentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="actualError != null">
+        #{actualError,jdbcType=REAL},
+      </if>
+      <if test="allowableError != null">
+        #{allowableError,jdbcType=REAL},
+      </if>
+      <if test="itemUnits != null">
+        #{itemUnits,jdbcType=VARCHAR},
+      </if>
+      <if test="testCount != null">
+        #{testCount,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.issCollege.po.TestresultExample" resultType="java.lang.Long">
+    select count(*) from testresult
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update testresult
+    <set>
+      <if test="record.testresultId != null">
+        testResult_id = #{record.testresultId,jdbcType=BIGINT},
+      </if>
+      <if test="record.sampletestId != null">
+        sampleTest_id = #{record.sampletestId,jdbcType=BIGINT},
+      </if>
+      <if test="record.itemName != null">
+        item_name = #{record.itemName,jdbcType=BIGINT},
+      </if>
+      <if test="record.elementResult != null">
+        element_result = #{record.elementResult,jdbcType=REAL},
+      </if>
+      <if test="record.temperature != null">
+        temperature = #{record.temperature,jdbcType=REAL},
+      </if>
+      <if test="record.humidity != null">
+        humidity = #{record.humidity,jdbcType=REAL},
+      </if>
+      <if test="record.instrumentModel != null">
+        instrument_Model = #{record.instrumentModel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.instrumentNum != null">
+        instrument_Num = #{record.instrumentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.actualError != null">
+        actual_Error = #{record.actualError,jdbcType=REAL},
+      </if>
+      <if test="record.allowableError != null">
+        allowable_Error = #{record.allowableError,jdbcType=REAL},
+      </if>
+      <if test="record.itemUnits != null">
+        item_units = #{record.itemUnits,jdbcType=VARCHAR},
+      </if>
+      <if test="record.testCount != null">
+        test_Count = #{record.testCount,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update testresult
+    set testResult_id = #{record.testresultId,jdbcType=BIGINT},
+      sampleTest_id = #{record.sampletestId,jdbcType=BIGINT},
+      item_name = #{record.itemName,jdbcType=BIGINT},
+      element_result = #{record.elementResult,jdbcType=REAL},
+      temperature = #{record.temperature,jdbcType=REAL},
+      humidity = #{record.humidity,jdbcType=REAL},
+      instrument_Model = #{record.instrumentModel,jdbcType=VARCHAR},
+      instrument_Num = #{record.instrumentNum,jdbcType=VARCHAR},
+      actual_Error = #{record.actualError,jdbcType=REAL},
+      allowable_Error = #{record.allowableError,jdbcType=REAL},
+      item_units = #{record.itemUnits,jdbcType=VARCHAR},
+      test_Count = #{record.testCount,jdbcType=SMALLINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.issCollege.po.Testresult">
+    update testresult
+    <set>
+      <if test="sampletestId != null">
+        sampleTest_id = #{sampletestId,jdbcType=BIGINT},
+      </if>
+      <if test="itemName != null">
+        item_name = #{itemName,jdbcType=BIGINT},
+      </if>
+      <if test="elementResult != null">
+        element_result = #{elementResult,jdbcType=REAL},
+      </if>
+      <if test="temperature != null">
+        temperature = #{temperature,jdbcType=REAL},
+      </if>
+      <if test="humidity != null">
+        humidity = #{humidity,jdbcType=REAL},
+      </if>
+      <if test="instrumentModel != null">
+        instrument_Model = #{instrumentModel,jdbcType=VARCHAR},
+      </if>
+      <if test="instrumentNum != null">
+        instrument_Num = #{instrumentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="actualError != null">
+        actual_Error = #{actualError,jdbcType=REAL},
+      </if>
+      <if test="allowableError != null">
+        allowable_Error = #{allowableError,jdbcType=REAL},
+      </if>
+      <if test="itemUnits != null">
+        item_units = #{itemUnits,jdbcType=VARCHAR},
+      </if>
+      <if test="testCount != null">
+        test_Count = #{testCount,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where testResult_id = #{testresultId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.issCollege.po.Testresult">
+    update testresult
+    set sampleTest_id = #{sampletestId,jdbcType=BIGINT},
+      item_name = #{itemName,jdbcType=BIGINT},
+      element_result = #{elementResult,jdbcType=REAL},
+      temperature = #{temperature,jdbcType=REAL},
+      humidity = #{humidity,jdbcType=REAL},
+      instrument_Model = #{instrumentModel,jdbcType=VARCHAR},
+      instrument_Num = #{instrumentNum,jdbcType=VARCHAR},
+      actual_Error = #{actualError,jdbcType=REAL},
+      allowable_Error = #{allowableError,jdbcType=REAL},
+      item_units = #{itemUnits,jdbcType=VARCHAR},
+      test_Count = #{testCount,jdbcType=SMALLINT}
+    where testResult_id = #{testresultId,jdbcType=BIGINT}
+  </update>
+</mapper>

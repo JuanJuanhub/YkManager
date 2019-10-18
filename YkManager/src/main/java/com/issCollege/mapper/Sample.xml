@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.issCollege.dao.SampleDAO">
+  <resultMap id="BaseResultMap" type="com.issCollege.po.Sample">
+    <id column="sampletb_id" jdbcType="BIGINT" property="sampletbId" />
+    <result column="sample_num" jdbcType="VARCHAR" property="sampleNum" />
+    <result column="sampleTest_id" jdbcType="INTEGER" property="sampletestId" />
+    <result column="sample_Type" jdbcType="BIGINT" property="sampleType" />
+    <result column="standardSample_name" jdbcType="BIGINT" property="standardsampleName" />
+    <result column="rock_type" jdbcType="BIGINT" property="rockType" />
+    <result column="sample_state" jdbcType="VARCHAR" property="sampleState" />
+    <result column="item_name" jdbcType="BIGINT" property="itemName" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="sample_created" jdbcType="TIMESTAMP" property="sampleCreated" />
+    <result column="reportnum" jdbcType="VARCHAR" property="reportnum" />
+    <result column="sample_count" jdbcType="BIGINT" property="sampleCount" />
+    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    sampletb_id, sample_num, sampleTest_id, sample_Type, standardSample_name, rock_type, 
+    sample_state, item_name, user_id, sample_created, reportnum, sample_count, project_name
+  </sql>
+  <select id="selectByExample" parameterType="com.issCollege.po.SampleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sample
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sample
+    where sampletb_id = #{sampletbId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sample
+    where sampletb_id = #{sampletbId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.issCollege.po.SampleExample">
+    delete from sample
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.issCollege.po.Sample">
+    insert into sample (sampletb_id, sample_num, sampleTest_id, 
+      sample_Type, standardSample_name, rock_type, 
+      sample_state, item_name, user_id, 
+      sample_created, reportnum, sample_count, 
+      project_name)
+    values (#{sampletbId,jdbcType=BIGINT}, #{sampleNum,jdbcType=VARCHAR}, #{sampletestId,jdbcType=INTEGER}, 
+      #{sampleType,jdbcType=BIGINT}, #{standardsampleName,jdbcType=BIGINT}, #{rockType,jdbcType=BIGINT}, 
+      #{sampleState,jdbcType=VARCHAR}, #{itemName,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{sampleCreated,jdbcType=TIMESTAMP}, #{reportnum,jdbcType=VARCHAR}, #{sampleCount,jdbcType=BIGINT}, 
+      #{projectName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.issCollege.po.Sample">
+    insert into sample
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sampletbId != null">
+        sampletb_id,
+      </if>
+      <if test="sampleNum != null">
+        sample_num,
+      </if>
+      <if test="sampletestId != null">
+        sampleTest_id,
+      </if>
+      <if test="sampleType != null">
+        sample_Type,
+      </if>
+      <if test="standardsampleName != null">
+        standardSample_name,
+      </if>
+      <if test="rockType != null">
+        rock_type,
+      </if>
+      <if test="sampleState != null">
+        sample_state,
+      </if>
+      <if test="itemName != null">
+        item_name,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="sampleCreated != null">
+        sample_created,
+      </if>
+      <if test="reportnum != null">
+        reportnum,
+      </if>
+      <if test="sampleCount != null">
+        sample_count,
+      </if>
+      <if test="projectName != null">
+        project_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sampletbId != null">
+        #{sampletbId,jdbcType=BIGINT},
+      </if>
+      <if test="sampleNum != null">
+        #{sampleNum,jdbcType=VARCHAR},
+      </if>
+      <if test="sampletestId != null">
+        #{sampletestId,jdbcType=INTEGER},
+      </if>
+      <if test="sampleType != null">
+        #{sampleType,jdbcType=BIGINT},
+      </if>
+      <if test="standardsampleName != null">
+        #{standardsampleName,jdbcType=BIGINT},
+      </if>
+      <if test="rockType != null">
+        #{rockType,jdbcType=BIGINT},
+      </if>
+      <if test="sampleState != null">
+        #{sampleState,jdbcType=VARCHAR},
+      </if>
+      <if test="itemName != null">
+        #{itemName,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="sampleCreated != null">
+        #{sampleCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportnum != null">
+        #{reportnum,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleCount != null">
+        #{sampleCount,jdbcType=BIGINT},
+      </if>
+      <if test="projectName != null">
+        #{projectName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.issCollege.po.SampleExample" resultType="java.lang.Long">
+    select count(*) from sample
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sample
+    <set>
+      <if test="record.sampletbId != null">
+        sampletb_id = #{record.sampletbId,jdbcType=BIGINT},
+      </if>
+      <if test="record.sampleNum != null">
+        sample_num = #{record.sampleNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sampletestId != null">
+        sampleTest_id = #{record.sampletestId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sampleType != null">
+        sample_Type = #{record.sampleType,jdbcType=BIGINT},
+      </if>
+      <if test="record.standardsampleName != null">
+        standardSample_name = #{record.standardsampleName,jdbcType=BIGINT},
+      </if>
+      <if test="record.rockType != null">
+        rock_type = #{record.rockType,jdbcType=BIGINT},
+      </if>
+      <if test="record.sampleState != null">
+        sample_state = #{record.sampleState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemName != null">
+        item_name = #{record.itemName,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.sampleCreated != null">
+        sample_created = #{record.sampleCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.reportnum != null">
+        reportnum = #{record.reportnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sampleCount != null">
+        sample_count = #{record.sampleCount,jdbcType=BIGINT},
+      </if>
+      <if test="record.projectName != null">
+        project_name = #{record.projectName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sample
+    set sampletb_id = #{record.sampletbId,jdbcType=BIGINT},
+      sample_num = #{record.sampleNum,jdbcType=VARCHAR},
+      sampleTest_id = #{record.sampletestId,jdbcType=INTEGER},
+      sample_Type = #{record.sampleType,jdbcType=BIGINT},
+      standardSample_name = #{record.standardsampleName,jdbcType=BIGINT},
+      rock_type = #{record.rockType,jdbcType=BIGINT},
+      sample_state = #{record.sampleState,jdbcType=VARCHAR},
+      item_name = #{record.itemName,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      sample_created = #{record.sampleCreated,jdbcType=TIMESTAMP},
+      reportnum = #{record.reportnum,jdbcType=VARCHAR},
+      sample_count = #{record.sampleCount,jdbcType=BIGINT},
+      project_name = #{record.projectName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.issCollege.po.Sample">
+    update sample
+    <set>
+      <if test="sampleNum != null">
+        sample_num = #{sampleNum,jdbcType=VARCHAR},
+      </if>
+      <if test="sampletestId != null">
+        sampleTest_id = #{sampletestId,jdbcType=INTEGER},
+      </if>
+      <if test="sampleType != null">
+        sample_Type = #{sampleType,jdbcType=BIGINT},
+      </if>
+      <if test="standardsampleName != null">
+        standardSample_name = #{standardsampleName,jdbcType=BIGINT},
+      </if>
+      <if test="rockType != null">
+        rock_type = #{rockType,jdbcType=BIGINT},
+      </if>
+      <if test="sampleState != null">
+        sample_state = #{sampleState,jdbcType=VARCHAR},
+      </if>
+      <if test="itemName != null">
+        item_name = #{itemName,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="sampleCreated != null">
+        sample_created = #{sampleCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportnum != null">
+        reportnum = #{reportnum,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleCount != null">
+        sample_count = #{sampleCount,jdbcType=BIGINT},
+      </if>
+      <if test="projectName != null">
+        project_name = #{projectName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sampletb_id = #{sampletbId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.issCollege.po.Sample">
+    update sample
+    set sample_num = #{sampleNum,jdbcType=VARCHAR},
+      sampleTest_id = #{sampletestId,jdbcType=INTEGER},
+      sample_Type = #{sampleType,jdbcType=BIGINT},
+      standardSample_name = #{standardsampleName,jdbcType=BIGINT},
+      rock_type = #{rockType,jdbcType=BIGINT},
+      sample_state = #{sampleState,jdbcType=VARCHAR},
+      item_name = #{itemName,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      sample_created = #{sampleCreated,jdbcType=TIMESTAMP},
+      reportnum = #{reportnum,jdbcType=VARCHAR},
+      sample_count = #{sampleCount,jdbcType=BIGINT},
+      project_name = #{projectName,jdbcType=VARCHAR}
+    where sampletb_id = #{sampletbId,jdbcType=BIGINT}
+  </update>
+</mapper>

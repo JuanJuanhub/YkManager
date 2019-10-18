@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.issCollege.dao.StandardsampleDAO">
+  <resultMap id="BaseResultMap" type="com.issCollege.po.Standardsample">
+    <id column="standardSample_id" jdbcType="BIGINT" property="standardsampleId" />
+    <result column="standardSample_name" jdbcType="VARCHAR" property="standardsampleName" />
+    <result column="standardSample_type" jdbcType="VARCHAR" property="standardsampleType" />
+    <result column="standardSample_state" jdbcType="VARCHAR" property="standardsampleState" />
+    <result column="element_name" jdbcType="VARCHAR" property="elementName" />
+    <result column="element_content" jdbcType="REAL" property="elementContent" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    standardSample_id, standardSample_name, standardSample_type, standardSample_state, 
+    element_name, element_content
+  </sql>
+  <select id="selectByExample" parameterType="com.issCollege.po.StandardsampleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from standardsample
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from standardsample
+    where standardSample_id = #{standardsampleId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from standardsample
+    where standardSample_id = #{standardsampleId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.issCollege.po.StandardsampleExample">
+    delete from standardsample
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.issCollege.po.Standardsample">
+    insert into standardsample (standardSample_id, standardSample_name, 
+      standardSample_type, standardSample_state, 
+      element_name, element_content)
+    values (#{standardsampleId,jdbcType=BIGINT}, #{standardsampleName,jdbcType=VARCHAR}, 
+      #{standardsampleType,jdbcType=VARCHAR}, #{standardsampleState,jdbcType=VARCHAR}, 
+      #{elementName,jdbcType=VARCHAR}, #{elementContent,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.issCollege.po.Standardsample">
+    insert into standardsample
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="standardsampleId != null">
+        standardSample_id,
+      </if>
+      <if test="standardsampleName != null">
+        standardSample_name,
+      </if>
+      <if test="standardsampleType != null">
+        standardSample_type,
+      </if>
+      <if test="standardsampleState != null">
+        standardSample_state,
+      </if>
+      <if test="elementName != null">
+        element_name,
+      </if>
+      <if test="elementContent != null">
+        element_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="standardsampleId != null">
+        #{standardsampleId,jdbcType=BIGINT},
+      </if>
+      <if test="standardsampleName != null">
+        #{standardsampleName,jdbcType=VARCHAR},
+      </if>
+      <if test="standardsampleType != null">
+        #{standardsampleType,jdbcType=VARCHAR},
+      </if>
+      <if test="standardsampleState != null">
+        #{standardsampleState,jdbcType=VARCHAR},
+      </if>
+      <if test="elementName != null">
+        #{elementName,jdbcType=VARCHAR},
+      </if>
+      <if test="elementContent != null">
+        #{elementContent,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.issCollege.po.StandardsampleExample" resultType="java.lang.Long">
+    select count(*) from standardsample
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update standardsample
+    <set>
+      <if test="record.standardsampleId != null">
+        standardSample_id = #{record.standardsampleId,jdbcType=BIGINT},
+      </if>
+      <if test="record.standardsampleName != null">
+        standardSample_name = #{record.standardsampleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.standardsampleType != null">
+        standardSample_type = #{record.standardsampleType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.standardsampleState != null">
+        standardSample_state = #{record.standardsampleState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.elementName != null">
+        element_name = #{record.elementName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.elementContent != null">
+        element_content = #{record.elementContent,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update standardsample
+    set standardSample_id = #{record.standardsampleId,jdbcType=BIGINT},
+      standardSample_name = #{record.standardsampleName,jdbcType=VARCHAR},
+      standardSample_type = #{record.standardsampleType,jdbcType=VARCHAR},
+      standardSample_state = #{record.standardsampleState,jdbcType=VARCHAR},
+      element_name = #{record.elementName,jdbcType=VARCHAR},
+      element_content = #{record.elementContent,jdbcType=REAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.issCollege.po.Standardsample">
+    update standardsample
+    <set>
+      <if test="standardsampleName != null">
+        standardSample_name = #{standardsampleName,jdbcType=VARCHAR},
+      </if>
+      <if test="standardsampleType != null">
+        standardSample_type = #{standardsampleType,jdbcType=VARCHAR},
+      </if>
+      <if test="standardsampleState != null">
+        standardSample_state = #{standardsampleState,jdbcType=VARCHAR},
+      </if>
+      <if test="elementName != null">
+        element_name = #{elementName,jdbcType=VARCHAR},
+      </if>
+      <if test="elementContent != null">
+        element_content = #{elementContent,jdbcType=REAL},
+      </if>
+    </set>
+    where standardSample_id = #{standardsampleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.issCollege.po.Standardsample">
+    update standardsample
+    set standardSample_name = #{standardsampleName,jdbcType=VARCHAR},
+      standardSample_type = #{standardsampleType,jdbcType=VARCHAR},
+      standardSample_state = #{standardsampleState,jdbcType=VARCHAR},
+      element_name = #{elementName,jdbcType=VARCHAR},
+      element_content = #{elementContent,jdbcType=REAL}
+    where standardSample_id = #{standardsampleId,jdbcType=BIGINT}
+  </update>
+</mapper>
