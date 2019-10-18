@@ -1,19 +1,22 @@
 spring:
   datasource:
-    url: jdbc:mysql://issc2016:3306/yk_manager?useUnicode=true&characterEncoding=utf-8&userSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/yk_manager?useUnicode=true&characterEncoding=utf-8&userSSL=false&serverTimezone=GMT%2B8
     username: ykUser
     password: ykuser
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     # 配置初始化大小
-    druid:      initial-size: 5
-      min-idle:  5      max-active: 20
+    druid:
+      initial-size: 5
+      min-idle:  5
+      max-active: 20
     # 获得链接等待超时时间
       max-wait: 60000 
     #间隔多久进行一次检测，检测需要关闭的空闲连接，单位是毫秒
       time-between-eviction-runs-millis: 60000
     #一个连接在池中最小生存的时间
-      min-evictable-idle-time-millis: 30000      validation-query: SELECT 1
+      min-evictable-idle-time-millis: 30000
+      validation-query: SELECT 1
       test-while-idle: true
       test-on-borrow: false
       test-on-return: false
@@ -23,4 +26,6 @@ spring:
       use-global-data-source-stat: true
       connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
 
-mybatis:  mapper-locations: classpath:com.issCollege.mapper/*.xml
+mybatis:
+  mapper-locations: classpath:com/issCollege/mapper/*.xml
+  type-aliases-package: com.issCollege.po

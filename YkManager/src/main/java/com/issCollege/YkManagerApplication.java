@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
-@MapperScan(value="classpath:com.issCollege.mapper")
+@MapperScan(basePackages = "com.issCollege.dao")
 @SpringBootApplication
 public class YkManagerApplication {
 
