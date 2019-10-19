@@ -26,7 +26,7 @@ public class UserController {
 	@RequestMapping("/select")
 	public Sample select(Sample sample){
 
-		Sample sp = sampleDAO.selectByPrimaryKey((long) 1);
+		Sample sp = sampleDAO.selectByPrimaryKey((long) 2);
 		System.out.println("执行了");
 		return sp;
 
