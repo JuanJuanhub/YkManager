@@ -1,7 +1,9 @@
 package com.issCollege.controller;
 
+import com.issCollege.dao.SampleAndUserDao;
 import com.issCollege.dao.SampleDAO;
 import com.issCollege.po.Sample;
+import com.issCollege.po.SampleAndUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,4 +54,14 @@ public class UserController {
 
 		sampleDAO.insert(sample);
 	}
+	@Autowired
+	SampleAndUserDao sampleAndUserDao;
+
+	@RequestMapping("/test")
+	public SampleAndUser sampleAndUser(){
+		SampleAndUser user =sampleAndUserDao.getSampAndUser((long) 1);
+		System.out.println(user);
+		return user;
+	}
+
 }

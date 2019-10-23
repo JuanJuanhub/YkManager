@@ -29,3 +29,8 @@ spring:
 mybatis:
   mapper-locations: classpath:com/issCollege/mapper/*.xml
   type-aliases-package: com.issCollege.po
+logging:
+  level:
+    com:
+      issCollege:
+        dao: debug
