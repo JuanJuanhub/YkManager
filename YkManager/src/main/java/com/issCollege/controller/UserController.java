@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
 
-@ResponseBody
+//@ResponseBody
 @Controller
 public class UserController {
 
@@ -57,11 +57,23 @@ public class UserController {
 	@Autowired
 	SampleAndUserDao sampleAndUserDao;
 
+    @ResponseBody
 	@RequestMapping("/test")
-	public SampleAndUser sampleAndUser(){
-		SampleAndUser user =sampleAndUserDao.getSampAndUser((long) 1);
+	public Map<String,Object> sampleAndUser(){
+        Map<String,Object> map = new HashMap<String,Object>();
+		List<SampleAndUser> user =sampleAndUserDao.getSampAndUser((long) 1);
+		map.put("data",user);
+		map.put("code","1000");
+		map.put("msg","");
+		map.put("code","0");
 		System.out.println(user);
-		return user;
+
+		return map;
 	}
+
+	@RequestMapping("/index")
+	public String index(){
+	    return "index";
+    }
 
 }
