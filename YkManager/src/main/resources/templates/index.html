@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!--    <link rel="stylesheet" href="../static/assets/css/layui.css" th:href="@{assets/css/layui.css}">-->
+    <link rel="stylesheet" href="assets/css/layui.css">
+    <link rel="stylesheet" href="../static/assets/css/admin.css" th:href="@{assets/css/admin.css}">
+    <link rel="icon" href="/favicon.ico" th:href="@{/favicon.ico}">
+    <script src="../static/assets/layui.js" th:src="@{assets/layui.js}"></script>
+
+    <title>管理后台</title>
+</head>
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header custom-header">
+            
+            <ul class="layui-nav layui-layout-left">
+                <li class="layui-nav-item slide-sidebar" lay-unselect>
+                    <a href="javascript:;" class="icon-font"><i class="ai ai-menufold"></i></a>
+                </li>
+            </ul>
+
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">BieJun</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">帮助中心</a></dd>
+                        <dd><a href="login.html">退出</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+
+        <div class="layui-side custom-admin">
+            <div class="layui-side-scroll">
+
+                <div class="custom-logo">
+                    <img src="../assets/images/logo.png" alt=""/>
+                    <h1>Admin Pro</h1>
+                </div>
+                <ul id="Nav" class="layui-nav layui-nav-tree">
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <i class="layui-icon">&#xe609;</i>
+                            <em>主页</em>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="views/console.html">控制台</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <i class="layui-icon">&#xe857;</i>
+                            <em>组件</em>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="views/form.html">表单</a></dd>
+                            <dd>
+                                <a href="javascript:;">页面</a>
+                                <dl class="layui-nav-child">
+                                    <dd>
+                                        <a href="login.html">登录页</a>
+                                    </dd>
+                                </dl>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <i class="layui-icon">&#xe612;</i>
+                            <em>用户</em>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="views/users.html">用户组</a></dd>
+                            <dd><a href="views/operaterule.html">权限配置</a></dd>
+                        </dl>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+        <div class="layui-body">
+<!--             <div class="layui-tab app-container" lay-allowClose="true" lay-filter="tabs">-->
+<!--                <ul id="appTabs" class="layui-tab-title custom-tab"></ul>-->
+<!--                 <div id="appTabPage" class="layui-tab-content"></div>-->
+<!--            </div>-->
+          <div id="toolbar" style="display: none">
+              <div class="layui-btn-group">
+                  <button type="button" class="layui-btn" ><i class="layui-icon">&#xe654;</i> 增加</button>
+                  <button type="button" class="layui-btn"><i class="layui-icon">&#xe642;</i> 编辑</button>
+                  <button type="button" class="layui-btn layui-btn-danger"><i class="layui-icon">&#xe640;</i> 删除</button>
+                  <button type="button" class="layui-btn" lay-event="get"><i class="layui-icon">&#xe615;</i> 查询</button>
+              </div>
+          </div>
+
+
+            <script type="text/html" id="barDemo">
+                <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+            </script>
+            <table  id="test" lay-filter="table"></table>
+        </div>
+
+
+<!--        <div class="mobile-mask"></div>-->
+    </div>
+    <script src="../static/index.js" data-main="home" th:src="@{index.js}"></script>
+
+    <script>
+        layui.use(['table','layer'], function(){
+            var table = layui.table;
+            var layer = layui.layer;
+
+            table.render({
+                elem: '#test'
+                ,toolbar: '#toolbar'
+                ,page : true
+                ,url:'/test'
+                ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                , cols: [
+                    [
+                        {type: 'checkbox'}
+                        ,{field: 'item_name', width: 100, title: '检测项目名称'}
+                        , {field: 'user_name', width: 100, title: '用户名'}
+                        , {field: 'sample_num', width: 100, title: '样品编号', sort: true}
+                        , {field: 'sampleTest_id',width: 100, title: '检测编号'}
+                        // ,{field:'sign', title: '签名', width: '30%', minWidth: 100} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                        , {field: 'sample_state',width: 100, title: '样品状态', sort: true}
+                        , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 120}
+                        // ,{field:'score', title: '评分', sort: true}
+                        // ,{field:'classify', title: '职业'}
+                        // ,{field:'wealth', width:137, title: '财富', sort: true}
+                    ]
+                ]
+
+            });
+            //监听查询事件(头工具栏)
+        table.on('toolbar(table)',function (obj) {
+
+          switch (obj.event) {
+              case 'get':
+                  layer.alert(123);
+                 get();
+                  break;
+
+          }
+            
+        });
+
+        });
+
+        //get函数
+        function get() {
+            alert(1);
+        }
+
+    </script>
+</body>
+</html>
