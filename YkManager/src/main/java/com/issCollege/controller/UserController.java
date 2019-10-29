@@ -5,7 +5,10 @@ import com.issCollege.dao.SampleDAO;
 import com.issCollege.po.Sample;
 import com.issCollege.po.SampleAndUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -35,10 +38,19 @@ public class UserController {
 
 	}
 
-	@RequestMapping("/insert")
-	public void insert(Sample sample){
+	@ResponseBody
+	@PostMapping("/insert")
+	public int insert(@RequestBody Sample sample){
 
-		sample.setItemName((long) 1);
+		String s = sample.getItemName().toString();
+
+		System.out.println(s);
+
+		int insert = sampleDAO.insert(sample);
+
+		return insert;
+
+		/*sample.setItemName((long) 1);
 		sample.setSampleState("1");
 		sample.setSampleCount((long) 1);
 		sample.setReportnum("123");
@@ -52,7 +64,7 @@ public class UserController {
 		sample.setSampleCreated(new Date());
 		sample.setUserId((long) 3);
 
-		sampleDAO.insert(sample);
+		sampleDAO.insert(sample);*/
 	}
 	@Autowired
 	SampleAndUserDao sampleAndUserDao;
