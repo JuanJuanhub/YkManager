@@ -85,7 +85,12 @@ public class UserController {
 
 	@RequestMapping("/index")
 	public String index(){
-	    return "index";
+	    return "index1";
     }
+
+    @RequestMapping("/table")
+    public String table(){
+    	return "table";
+	}
 
 }

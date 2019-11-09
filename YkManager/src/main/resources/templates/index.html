@@ -4,362 +4,180 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<!--    <link rel="stylesheet" href="../static/assets/css/layui.css" th:href="@{assets/css/layui.css}">-->
+    <!--    <link rel="stylesheet" href="../static/assets/css/layui.css" th:href="@{assets/css/layui.css}">-->
     <link rel="stylesheet" href="assets/css/layui.css">
     <link rel="stylesheet" href="../static/assets/css/admin.css" th:href="@{assets/css/admin.css}">
     <link rel="icon" href="/favicon.ico" th:href="@{/favicon.ico}">
-    <script src="webjars/jquery/3.2.0/dist/jquery.js"></script>
-    <script src="../static/assets/layui.js" th:src="@{assets/layui.js}"></script>
+    <script type="text/javascript" src="webjars/jquery/3.2.0/dist/jquery.js"></script>
+    <script type="text/javascript" src="../static/assets/layui.js" th:src="@{assets/layui.js}"></script>
 
     <title>管理后台</title>
 </head>
 <body class="layui-layout-body">
-    <div class="layui-layout layui-layout-admin">
-        <div class="layui-header custom-header">
-            
-            <ul class="layui-nav layui-layout-left">
-                <li class="layui-nav-item slide-sidebar" lay-unselect>
-                    <a href="javascript:;" class="icon-font"><i class="ai ai-menufold"></i></a>
-                </li>
-            </ul>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header custom-header">
 
-            <ul class="layui-nav layui-layout-right">
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item slide-sidebar" lay-unselect>
+                <a href="javascript:;" class="icon-font"><i class="ai ai-menufold"></i></a>
+            </li>
+        </ul>
+
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">BieJun</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">帮助中心</a></dd>
+                    <dd><a href="login.html">退出</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+
+    <div class="layui-side custom-admin">
+        <div class="layui-side-scroll">
+
+            <div class="custom-logo">
+                <img src="../assets/images/logo.png" alt=""/>
+                <h1>Admin Pro</h1>
+            </div>
+            <ul id="Nav" class="layui-nav layui-nav-tree" lay-filter="left-menu">
                 <li class="layui-nav-item">
-                    <a href="javascript:;">BieJun</a>
+                    <a href="javascript:;">
+                        <i class="layui-icon">&#xe609;</i>
+                        <em>主页</em>
+                    </a>
                     <dl class="layui-nav-child">
-                        <dd><a href="">帮助中心</a></dd>
-                        <dd><a href="login.html">退出</a></dd>
+                        <dd><a href="javascript:;" data-id="1" data-url="/table" class="site-demo-active"
+                               data-title="控制台" data-type="tabAdd">控制台</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">
+                        <i class="layui-icon">&#xe857;</i>
+                        <em>组件</em>
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="views/form.html">表单</a></dd>
+                        <dd>
+                            <a href="javascript:;">页面</a>
+                            <dl class="layui-nav-child">
+                                <dd>
+                                    <a href="login.html">登录页</a>
+                                </dd>
+                            </dl>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">
+                        <i class="layui-icon">&#xe612;</i>
+                        <em>用户</em>
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="views/users.html">用户组</a></dd>
+                        <dd><a href="views/operaterule.html">权限配置</a></dd>
                     </dl>
                 </li>
             </ul>
+
         </div>
+    </div>
 
-        <div class="layui-side custom-admin">
-            <div class="layui-side-scroll">
-
-                <div class="custom-logo">
-                    <img src="../assets/images/logo.png" alt=""/>
-                    <h1>Admin Pro</h1>
-                </div>
-                <ul id="Nav" class="layui-nav layui-nav-tree">
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">
-                            <i class="layui-icon">&#xe609;</i>
-                            <em>主页</em>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="views/console.html">控制台</a></dd>
-                        </dl>
-                    </li>
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">
-                            <i class="layui-icon">&#xe857;</i>
-                            <em>组件</em>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="views/form.html">表单</a></dd>
-                            <dd>
-                                <a href="javascript:;">页面</a>
-                                <dl class="layui-nav-child">
-                                    <dd>
-                                        <a href="login.html">登录页</a>
-                                    </dd>
-                                </dl>
-                            </dd>
-                        </dl>
-                    </li>
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">
-                            <i class="layui-icon">&#xe612;</i>
-                            <em>用户</em>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="views/users.html">用户组</a></dd>
-                            <dd><a href="views/operaterule.html">权限配置</a></dd>
-                        </dl>
-                    </li>
+    <div class="layui-body">
+        <!--             <div class="layui-tab app-container" lay-allowClose="true" lay-filter="tabs">-->
+        <!--                <ul id="appTabs" class="layui-tab-title custom-tab"></ul>-->
+        <!--                 <div id="appTabPage" class="layui-tab-content"></div>-->
+        <!--            </div>-->
+        <!--tab标签-->
+        <div class="layui-tab" lay-filter="demo" lay-allowclose="true" style="margin-left: 200px;">
+            <ul class="layui-tab-title"></ul>
+            <div class="layui-tab-content"></div>
+        </div>
+        <!--内容主题-->
+        <!--<div style="padding-left: 15px">
+            &lt;!&ndash; 内容主体区域 &ndash;&gt;
+            <div class="layui-tab" lay-allowClose="true" lay-filter="tab-switch">
+                <ul class="layui-tab-title" lay-allowClose="true">
+                    <li class="layui-this ">首页</li>
                 </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        内容
+                    </div>
+                </div>
 
             </div>
-        </div>
-
-        <div class="layui-body">
-<!--             <div class="layui-tab app-container" lay-allowClose="true" lay-filter="tabs">-->
-<!--                <ul id="appTabs" class="layui-tab-title custom-tab"></ul>-->
-<!--                 <div id="appTabPage" class="layui-tab-content"></div>-->
-<!--            </div>-->
-
-            <!--表单-->
-            <form class="layui-form" action="" id="form" style="display: none">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">样品名称</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="itemName" required lay-verify="required" placeholder="请输入样品名称"
-                               autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-
-                <div class="layui-form-item">
-                    <label class="layui-form-label">样品状态</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="sampleState" required lay-verify="required" placeholder="请输入样品状态"
-                               autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">样品数里</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="sampleCount" required lay-verify="required" placeholder="请输入样品数里"
-                               autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">样品编号</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="reportnum" required lay-verify="required" placeholder="请输入样品编号"
-                               autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">样品编号</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="sampleNum" required lay-verify="required" placeholder="请输入样品编号"
-                               autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">样品类型</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="rockType" required lay-verify="required" placeholder="请输入样品类型"
-                               autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">标准样品名称</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="standardsampleName" required lay-verify="required" placeholder="请输入标准样品名称"
-                               autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">项目名称</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="projectName" required lay-verify="required" placeholder="请输入项目名称"
-                               autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <!--自增主键不参与-->
-                <!--<div class="layui-form-item">
-                    <label class="layui-form-label">样品表编号</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="sampletbId" required lay-verify="required" placeholder="请输入样品表编号"
-                               autocomplete="off" class="layui-input">
-                    </div>
-                </div>-->
-                <div class="layui-form-item">
-                    <label class="layui-form-label">样品类型</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="sampleType" required lay-verify="required" placeholder="请输入样品类型"
-                               autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">样品检测编号</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="sampletestId" required lay-verify="required" placeholder="请输入样品检测编号"
-                               autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">收样时间</label>
-                    <div class="layui-input-block">
-                        <input type="date" name="sampleCreated" required lay-verify="required" placeholder="请输入收样时间"
-                               autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">用户编号</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="userId" required lay-verify="required" placeholder="请输入用户编号"
-                               autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <!--新增-->
-
-
-
-                <!--<div class="layui-form-item">
-                    <label class="layui-form-label">密码框</label>
-                    <div class="layui-input-inline">
-                        <input type="password" name="password" required lay-verify="required" placeholder="请输入密码"
-                               autocomplete="off" class="layui-input">
-                    </div>
-                    <div class="layui-form-mid layui-word-aux">辅助文字</div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">选择框</label>
-                    <div class="layui-input-block">
-                        <select name="city" lay-verify="required">
-                            <option value=""></option>
-                            <option value="0">北京</option>
-                            <option value="1">上海</option>
-                            <option value="2">广州</option>
-                            <option value="3">深圳</option>
-                            <option value="4">杭州</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">复选框</label>
-                    <div class="layui-input-block">
-                        <input type="checkbox" name="like[write]" title="写作">
-                        <input type="checkbox" name="like[read]" title="阅读" checked>
-                        <input type="checkbox" name="like[dai]" title="发呆">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">开关</label>
-                    <div class="layui-input-block">
-                        <input type="checkbox" name="switch" lay-skin="switch">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">单选框</label>
-                    <div class="layui-input-block">
-                        <input type="radio" name="sex" value="男" title="男">
-                        <input type="radio" name="sex" value="女" title="女" checked>
-                    </div>
-                </div>
-                <div class="layui-form-item layui-form-text">
-                    <label class="layui-form-label">文本域</label>
-                    <div class="layui-input-block">
-                        <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
-                    </div>
-                </div>-->
-                <div class="layui-form-item">
-                    <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                    </div>
-                </div>
-            </form>
-
-            <!--toolbar-->
-          <div id="toolbar" style="display: none">
-              <div class="layui-btn-group">
-                  <button type="button" class="layui-btn" ><i class="layui-icon">&#xe654;</i> 增加</button>
-                  <button type="button" class="layui-btn"><i class="layui-icon">&#xe642;</i> 编辑</button>
-                  <button type="button" class="layui-btn layui-btn-danger"><i class="layui-icon">&#xe640;</i> 删除</button>
-                  <button type="button" class="layui-btn" lay-event="get"><i class="layui-icon">&#xe615;</i> 查询</button>
-              </div>
-          </div>
-
-
-            <script type="text/html" id="barDemo">
-                <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-            </script>
-
-            <!--数据表-->
-            <table class="layui-table" id="test" lay-filter="LAY-table-data"></table>
-        </div>
-
-
-<!--        <div class="mobile-mask"></div>-->
+        </div>-->
     </div>
-    <script src="../static/index.js" data-main="home" th:src="@{index.js}"></script>
+</div>
 
-    <script>
-        layui.use(['table','layer','form'], function(){
-            var table = layui.table;
-            var layer = layui.layer;
-            var form = layui.form;
 
-            table.render({
-                elem: '#test'
-                ,toolbar: '#toolbar'
-                ,page : true
-                ,url:'/test'
-                ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-                , cols: [
-                    [
-                        {type: 'checkbox'}
-                        ,{field: 'item_name', width: 100, title: '检测项目名称'}
-                        , {field: 'user_name', width: 100, title: '用户名'}
-                        , {field: 'sample_num', width: 100, title: '样品编号', sort: true}
-                        , {field: 'sampleTest_id',width: 100, title: '检测编号'}
-                        // ,{field:'sign', title: '签名', width: '30%', minWidth: 100} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
-                        , {field: 'sample_state',width: 100, title: '样品状态', sort: true}
-                        , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 120}
-                        // ,{field:'score', title: '评分', sort: true}
-                        // ,{field:'classify', title: '职业'}
-                        // ,{field:'wealth', width:137, title: '财富', sort: true}
-                    ]
-                ]
+<!--<script src="../static/index.js" data-main="home" th:src="@{index.js}"></script>-->
+<!--表单-->
 
-            });
-            //监听查询事件(头工具栏)
-        table.on('toolbar(LAY-table-data)',function (obj) {
 
-          switch (obj.event) {
-              case 'get':
-                  layer.alert(123);
-                 get();
-                  break;
+<!--toolbar-->
 
-          }
-            
-        });
 
-        //监听行工具
-            table.on('tool(LAY-table-data)', function (obj) {
-                var event = obj.event;
-                if (event === 'edit') {
+<!--数据表-->
 
-                    //信息窗
-                    var open = layer.open({
-                        type: 1,
-                        title: '提交表单',
-                        shadeClose: true,
-                        shade: false,
-                        // maxmin: true, //开启最大化最小化按钮
-                        area: ['893px', '600px'],
-                        content: $("#form")
-
-                    });
-                }
-            });
-            // 添加单提交
-            form.on('submit(formDemo)', function(data) {
-                // ajax方式添加
-                $.ajax({
-                    url: "insert",
-                    type: "POST",
-                    data: JSON.stringify(data.field),
-                    contentType: 'application/json',
-                    dataType: 'json',
-                    success: function(data) {
-                        if (data>0) {
-                            layer.close(layer.index);
-                            layer.msg('添加成功');
-                            table.reload('test');
-                        } else {
-                            layer.msg('添加失败');
-                        }
-                    },
-                    error: function() {
-                        console.log("ajax error");
+<script>
+    layui.use(['element', 'layer', 'jquery'], function () {
+        var element = layui.element;
+        // var layer = layui.layer;
+        var $ = layui.$;
+        // 配置tab实践在下面无法获取到菜单元素
+        $('.site-demo-active').on('click', function () {
+            var dataid = $(this);
+            //这时会判断右侧.layui-tab-title属性下的有lay-id属性的li的数目，即已经打开的tab项数目
+            if ($(".layui-tab-title li[lay-id]").length <= 0) {
+                //如果比零小，则直接打开新的tab项
+                active.tabAdd(dataid.attr("data-url"), dataid.attr("data-id"), dataid.attr("data-title"));
+            } else {
+                //否则判断该tab项是否以及存在
+                var isData = false; //初始化一个标志，为false说明未打开该tab项 为true则说明已有
+                $.each($(".layui-tab-title li[lay-id]"), function () {
+                    //如果点击左侧菜单栏所传入的id 在右侧tab项中的lay-id属性可以找到，则说明该tab项已经打开
+                    if ($(this).attr("lay-id") == dataid.attr("data-id")) {
+                        isData = true;
                     }
-                });
-                // 阻止表单跳转
-                return false;
-            });
-
-
+                })
+                if (isData == false) {
+                    //标志为false 新增一个tab项
+                    active.tabAdd(dataid.attr("data-url"), dataid.attr("data-id"), dataid.attr("data-title"));
+                }
+            }
+            //最后不管是否新增tab，最后都转到要打开的选项页面上
+            active.tabChange(dataid.attr("data-id"));
         });
 
+        var active = {
+            //在这里给active绑定几项事件，后面可通过active调用这些事件
+            tabAdd: function (url, id, name) {
+                //新增一个Tab项 传入三个参数，分别对应其标题，tab页面的地址，还有一个规定的id，是标签中data-id的属性值
+                //关于tabAdd的方法所传入的参数可看layui的开发文档中基础方法部分
+                element.tabAdd('demo', {
+                    title: name,
+                    content: '<iframe data-frameid="' + id + '" scrolling="auto" frameborder="0"  src="' + url + '.html" style="width:100%;height:99%;"></iframe>',
+                    id: id //规定好的id
+                })
+                FrameWH();  //计算ifram层的大小
+            },
+            tabChange: function (id) {
+                //切换到指定Tab项
+                element.tabChange('demo', id); //根据传入的id传入到指定的tab项
+            },
+            tabDelete: function (id) {
+                element.tabDelete("demo", id);//删除
+            }
+        };
 
-
-    </script>
+        function FrameWH() {
+            var h = $(window).height();
+            $("iframe").css("height", h + "px");
+        }
+    });
+</script>
 </body>
 </html>
